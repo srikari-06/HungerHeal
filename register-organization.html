@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HungerHeal - Register Your Organization</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #4CAF50;
+            --secondary: #FF9800;
+            --accent: #2196F3;
+            --light: #f9f9f9;
+            --dark: #333;
+            --gray: #f0f0f0;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), #2E7D32);
+            color: white;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-header h1 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #0b7dda;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 1rem;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-heart"></i>
+                <span>HungerHeal</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="register.html">Register</a></li>
+                    <li><a href="donor.html">Donor</a></li>
+                    <li><a href="ngo.html">NGO</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Register Your Organization</h1>
+            <p>Join HungerHeal's network of NGOs and help redistribute food to those in need</p>
+        </div>
+
+        <div class="form-container">
+            <form id="orgRegistrationForm">
+                <div class="form-group">
+                    <label for="orgName">Organization Name *</label>
+                    <input type="text" id="orgName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="orgType">Organization Type *</label>
+                    <select id="orgType" required>
+                        <option value="">Select Type</option>
+                        <option value="foodbank">Food Bank</option>
+                        <option value="shelter">Shelter</option>
+                        <option value="community">Community Center</option>
+                        <option value="religious">Religious Organization</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="orgDescription">Organization Description *</label>
+                    <textarea id="orgDescription" placeholder="Describe your organization and its mission" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="contactName">Contact Person Name *</label>
+                    <input type="text" id="contactName" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="contactEmail">Contact Email *</label>
+                        <input type="email" id="contactEmail" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contactPhone">Contact Phone *</label>
+                        <input type="tel" id="contactPhone" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address">Address *</label>
+                    <textarea id="address" required></textarea>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="city">City *</label>
+                        <input type="text" id="city" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="zipcode">ZIP Code *</label>
+                        <input type="text" id="zipcode" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="serviceArea">Service Area Description *</label>
+                    <textarea id="serviceArea" placeholder="Describe the communities or areas you serve" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="capacity">Daily Food Distribution Capacity (meals) *</label>
+                    <input type="number" id="capacity" min="1" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="storage">Storage Capacity *</label>
+                    <select id="storage" required>
+                        <option value="">Select Capacity</option>
+                        <option value="small">Small (up to 100 kg)</option>
+                        <option value="medium">Medium (100-500 kg)</option>
+                        <option value="large">Large (500+ kg)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="certification">Food Safety Certification</label>
+                    <select id="certification">
+                        <option value="">Select Certification</option>
+                        <option value="yes">Yes, we are certified</option>
+                        <option value="no">No, not certified</option>
+                        <option value="pending">Certification in process</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="transportation">Transportation Availability *</label>
+                    <select id="transportation" required>
+                        <option value="">Select Option</option>
+                        <option value="pickup">We can pickup donations</option>
+                        <option value="delivery">We need delivery</option>
+                        <option value="both">Both pickup and delivery possible</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="hours">Operating Hours *</label>
+                    <input type="text" id="hours" placeholder="e.g., Mon-Fri 9am-5pm" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="website">Website (optional)</label>
+                    <input type="url" id="website">
+                </div>
+                
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" required>
+                        I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a> *
+                    </label>
+                </div>
+                
+                <button type="submit" class="btn">Register Organization</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('orgRegistrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for registering your organization with HungerHeal! Our team will review your application and contact you within 2 business days.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>

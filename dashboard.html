@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodSaver - Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #4CAF50;
+            --secondary: #FF9800;
+            --accent: #2196F3;
+            --light: #f9f9f9;
+            --dark: #333;
+            --gray: #f0f0f0;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), #2E7D32);
+            color: white;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .welcome-section {
+            background: linear-gradient(135deg, var(--primary), #2E7D32);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .welcome-section h1 {
+            margin-bottom: 0.5rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card.primary .stat-number {
+            color: var(--primary);
+        }
+
+        .stat-card.secondary .stat-number {
+            color: var(--secondary);
+        }
+
+        .stat-card.accent .stat-number {
+            color: var(--accent);
+        }
+
+        .dashboard-sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+        }
+
+        .content-section {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 极速5);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--gray);
+        }
+
+        .section-header h2 {
+            color: var(--primary);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .data-table th {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .data-table tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .action-card {
+            background-color: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .action-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #2E7D32;
+            transform: translateY(-2px);
+        }
+
+        .badges-container {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            color: white;
+            min-width: 150px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .badge-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 1rem;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .dashboard-sections {
+                grid-template-columns: 1fr;
+            }
+            
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-leaf"></i>
+                <span>FoodSaver</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                    <li><a href="donor.html">Donor</a></li>
+                    <li><a href="ngo.html">NGO</a></li>
+                    <li><a href="rewards.html">Rewards</a></li>
+                    <li><a href="login.html">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="welcome-section">
+            <h1>Welcome back, Sarah!</h1>
+            <p>Here's your impact summary for October 2023</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card primary">
+                <div class="stat-number">86</div>
+                <div class="stat-label">Total Donations (kg)</div>
+            </div>
+            <div class="stat-card secondary">
+                <div class="stat-number">430</div>
+                <div class="stat-label">Meals Provided</div>
+            </div>
+            <div class="stat-card accent">
+                <div class="stat-number">1,247</div>
+                <div class="stat-label">Points Earned</div>
+            </div>
+            <div class="stat-card primary">
+                <div class="stat-number">72%</div>
+                <div class="stat-label">Waste Reduction</div>
+            </div>
+        </div>
+
+        <div class="dashboard-sections">
+            <div class="content-section">
+                <div class="section-header">
+                    <h2>Your Recent Donations</h2>
+                    <a href="donor.html" class="btn">Donate More</a>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Food Type</th>
+                            <th>Quantity</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Bakery Items</td>
+                            <td>15 kg</td>
+                            <td>2023-10-15</td>
+                            <td>Delivered</td>
+                        </tr>
+                        <tr>
+                            <td>Vegetables</td>
+                            <td>28 kg</td>
+                            <td>2023-10-14</td>
+                            <td>In Transit</td>
+                        </tr>
+                        <tr>
+                            <td>Fruits</td>
+                            <td>22 kg</td>
+                            <td>2023-10-14</td>
+                            <td>Available</td>
+                        </tr>
+                        <tr>
+                            <td>Bread</td>
+                            <td>12 kg</td>
+                            <td>2023-10-13</td>
+                            <td>Delivered</td>
+                        </tr>
+                        <tr>
+                            <td>Dairy</td>
+                            <td>8 kg</td>
+                            <td>2023-10-12</td>
+                            <td>Delivered</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="content-section">
+                <div class="section-header">
+                    <h2>Your Badges</h2>
+                    <a href="rewards.html" class="btn">View All</a>
+                </div>
+                <div class="badges-container">
+                    <div class="badge">
+                        <div class="badge-icon">🥇</div>
+                        <h3>First Donation</h3>
+                        <p>Earned: Oct 12, 2023</p>
+                    </div>
+                    <div class="badge">
+                        <div class="badge-icon">🌱</div>
+                        <h3>Eco Warrior</h3>
+                        <p>Earned: Oct 14, 2023</p>
+                    </div>
+                    <div class="badge">
+                        <div class="badge-icon">🏆</div>
+                        <h3>Top Donor</h3>
+                        <p>Earned: Oct 15, 2023</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <div class="section-header">
+                <h2>Food Requests Near You</h2>
+                <a href="requests.html" class="btn">View All Requests</a>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Organization</th>
+                        <th>Food Needed</th>
+                        <th>Quantity</th>
+                        <th>Location</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Community Shelter</td>
+                        <td>Vegetables</td>
+                        <td>20 kg</td>
+                        <td>2.3 km away</td>
+                        <td><button class="btn" style="padding: 0.4rem 0.8rem; font-size: 0.9rem;">Donate</button></td>
+                    </tr>
+                    <tr>
+                        <td>Youth Center</td>
+                        <td>Bakery Items</td>
+                        <td>15 kg</td>
+                        <td>3.1 km away</td>
+                        <td><button class="btn" style="padding: 0.4rem 0.8rem; font-size: 0.9rem;">Donate</button></td>
+                    </tr>
+                    <tr>
+                        <td>Food Bank</td>
+                        <td>Fruits</td>
+                        <td>25 kg</td>
+                        <td>4.5 km away</td>
+                        <td><button class="btn" style="padding: 0.4rem 0.8rem; font-size: 0.9rem;">Donate</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="quick-actions">
+            <div class="action-card">
+                <div class="action-icon">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <h3>Donate Food</h3>
+                <p>Submit a new food donation</p>
+                <a href="donor.html" class="btn">Donate Now</a>
+            </div>
+            <div class="action-card">
+                <div class="action-icon">
+                    <i class="fas fa-hands-helping"></i>
+                </div>
+                <h3>View Requests</h3>
+                <p>See organizations in need</p>
+                <a href="requests.html" class="btn">View Requests</a>
+            </div>
+            <div class="action-card">
+                <div class="action-icon">
+                    <i class="fas fa-award"></i>
+                </div>
+                <h3>Your Rewards</h3>
+                <p>Check your points and badges</p>
+                <a href="rewards.html" class="btn">View Rewards</a>
+            </div>
+            <div class="action-card">
+                <div class="action-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Your Impact</h3>
+                <p>See your contribution analytics</p>
+                <a href="impact.html" class="btn">View Analytics</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple animation for stats counting up
+        document.addEventListener('DOMContentLoaded', function() {
+            const statNumbers = document.querySelectorAll('.stat-number');
+            
+            statNumbers.forEach(stat => {
+                const target = parseInt(stat.textContent);
+                let current = 0;
+                const increment = Math.ceil(target / 100);
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        stat.textContent = target;
+                        clearInterval(timer);
+                    } else {
+                        stat.textContent = current;
+                    }
+                }, 20);
+            });
+        });
+    </script>
+</body>
+</html>
